@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+import 'package:to_do/note.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,13 +31,34 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  Client client = http.Client();
 
-  void _incrementCounter() {
+  List<Note> notes = [];
+
+  @override
+  void initState() {
+    _fetchNotes();
+    super.initState();
+  }
+
+  _fetchNotes() async {
+    // const String getUrl =  "http://10.0.2.2:8000/";
+    // notes = [];
+    // List response = json.decode({await client.get(new Uri.http("locahost:8000",""))}.body);
+    var response = await http.get(Uri.http("10.0.2.2:8000", "/api/v1/tasks/"));
+    var jsonData = jsonDecode(response.body);
+    List<Note> notes = [];
+    for (var n in jsonData){
+      Note note = Note(n["id"], n["body"]);
+      notes.add(note);
+    }
     setState(() {
-      _counter++;
     });
   }
+
+  void _addToDoNote(){
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +66,16 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        children: <Widget>[Text("First Note")],
-      ),
+      body:ListView.builder(
+        itemCount: notes.length,
+          itemBuilder: (BuildContext context, int index){
+          return ListTile(
+            title:Text("Title Here"),
+          );
+          },
+        ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _addToDoNote,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
