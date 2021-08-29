@@ -1,6 +1,6 @@
-# to_do
+# TaskApp
 
-To do List technical assesment test.
+An Android App that acts as a client and consumes data from an API that sends a GET request, retrieving a list of tasks, POST request to create a new task, update and delete to manipulate the task objects.
 
 ## Getting Started
 
