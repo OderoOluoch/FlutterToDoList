@@ -22,15 +22,13 @@ class Service {
   }
 
   static deleteTask(id) async {
-     http.Response  response = await  http.delete(Uri.parse(url + id.toString() + "/delete"));
-     print(response.body);
+    http.Response response =
+        await http.delete(Uri.parse(url + id.toString() + "/delete"));
+    print(response.body);
   }
 
   static createTask(String taskTitle, String taskDetail) async {
-    Map data = {
-      "title" : taskTitle,
-      "detail" : taskDetail
-    };
+    Map data = {"title": taskTitle, "detail": taskDetail};
     String body = json.encode(data);
     http.Response response = await http.post(
       Uri.parse("https://oderotaskapi.herokuapp.com/api/v1/tasks/create/"),
@@ -40,18 +38,18 @@ class Service {
     print(response.body);
   }
 
-  static updateTask(int id,String taskTitle, String taskDetail, bool complete) async {
-    Map data = {
-      "title" : taskTitle,
-      "detail" : taskDetail,
-      "complete" : complete
-    };
+  static updateTask(
+      int id, String taskTitle, String taskDetail, bool complete) async {
+    Map data = {"title": taskTitle, "detail": taskDetail, "complete": complete};
     String body = json.encode(data);
     http.Response response = await http.put(
-      Uri.parse("https://oderotaskapi.herokuapp.com/api/v1/tasks/"+ id.toString() + "/update"),
+      Uri.parse("https://oderotaskapi.herokuapp.com/api/v1/tasks/" +
+          id.toString() +
+          "/update"),
       headers: {"Content-Type": "application/json"},
       body: body,
     );
     print(response.body);
   }
 }
+

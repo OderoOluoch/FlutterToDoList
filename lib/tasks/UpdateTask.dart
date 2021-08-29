@@ -7,7 +7,7 @@ class UpdateTaskPage extends StatefulWidget {
   final String detail;
   late bool complete;
 
-   UpdateTaskPage(
+  UpdateTaskPage(
       {Key? key,
       required this.id,
       required this.title,
@@ -84,7 +84,7 @@ class _UpdateTaskPageState extends State<UpdateTaskPage> {
               ElevatedButton(
                   onPressed: () {
                     Service.updateTask(widget.id, titleController.text,
-                        descriptionController.text,widget.complete);
+                        descriptionController.text, widget.complete);
                     Navigator.pop(context);
                   },
                   child: Text("Update Task")),
