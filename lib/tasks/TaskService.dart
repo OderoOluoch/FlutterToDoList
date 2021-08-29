@@ -39,4 +39,19 @@ class Service {
     );
     print(response.body);
   }
+
+  static updateTask(int id,String taskTitle, String taskDetail, bool complete) async {
+    Map data = {
+      "title" : taskTitle,
+      "detail" : taskDetail,
+      "complete" : complete
+    };
+    String body = json.encode(data);
+    http.Response response = await http.put(
+      Uri.parse("https://oderotaskapi.herokuapp.com/api/v1/tasks/"+ id.toString() + "/update"),
+      headers: {"Content-Type": "application/json"},
+      body: body,
+    );
+    print(response.body);
+  }
 }
