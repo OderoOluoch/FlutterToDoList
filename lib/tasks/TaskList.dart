@@ -63,21 +63,21 @@ class TaskListState extends State<TaskList> {
             } else {
               Task task = _tasks[index];
               return Card(
-                child : ListTile(
-              tileColor: task.complete ? Colors.grey : null,
-                title: Text(task.title),
-                subtitle: Text(task.detail),
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => UpdateTaskPage(
-                        id: task.id,
-                        title: task.title,
-                        detail: task.detail,
-                        complete: task.complete))),
-                trailing: IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () => _deleteTask(task.id),
+                child: ListTile(
+                  tileColor: task.complete ? Colors.grey : null,
+                  title: Text(task.title),
+                  subtitle: Text(task.detail),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => UpdateTaskPage(
+                          id: task.id,
+                          title: task.title,
+                          detail: task.detail,
+                          complete: task.complete))),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () => _deleteTask(task.id),
+                  ),
                 ),
-              ),
               );
             }
           },
