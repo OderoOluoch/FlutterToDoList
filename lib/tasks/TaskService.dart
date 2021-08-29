@@ -22,7 +22,7 @@ class Service {
   }
 
   static deleteTask(id) async {
-     http.Response  response = await  http.delete(Uri.parse(url + id + "delete"));
+     http.Response  response = await  http.delete(Uri.parse(url + id.toString() + "/delete"));
      print(response.body);
   }
 
